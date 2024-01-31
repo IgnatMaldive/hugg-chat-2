@@ -20,7 +20,7 @@ def index():
         </form>
     '''
 
-@app.route('/search', methods=['GET'])
+@app.route('/search')
 def search():
     print('holamanola')
 
