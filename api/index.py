@@ -1,11 +1,9 @@
 from flask import Flask, request, render_template_string
-from tavily import TavilyClient
 from flask_cors import CORS
 
 app = Flask(__name__)
 
-# Initialize Tavily client with your API key
-tavily = TavilyClient(api_key="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")
+
 
 CORS(app)
 
@@ -23,7 +21,7 @@ def index():
 
 @app.route('/search', methods=['GET'])
 def search():
-    return('manolaffff')
+    return('pasitos')
 
 if __name__ == '__main__':
     app.run(debug=True)
