@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 from hugchat import hugchat
 from hugchat.login import Login
@@ -24,8 +24,12 @@ def index():
 @app.route('/search', methods=['GET'])
 def search():
     try:
+        # Get the query parameter from the request
+        user_query = request.args.get('query', '')
+
         chatbot = hugchat.ChatBot(cookies=cookies.get_dict()) 
-        query_result = chatbot.query("my name is lola")
+        query_result = chatbot.query(user_query)  # Use the user's query
+
         if isinstance(query_result, str):
             return query_result.encode('utf-8')
         else:
