@@ -1,11 +1,12 @@
 from flask import Flask
 from tavily import TavilyClient
 from flask_cors import CORS
+from hugchat import hugchat
+from hugchat.login import Login
 
 app = Flask(__name__)
 
-# Initialize Tavily client with your API key
-tavily = TavilyClient(api_key="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")
+
 
 CORS(app)
 
