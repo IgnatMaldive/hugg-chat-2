@@ -32,18 +32,7 @@ def index():
 
 @app.route('/search', methods=['GET'])
 def search():
-    # Get the search query from the request
-    query = request.args.get('query', '')
-    if query:
-        # Perform the search using Tavily client
-        response = tavily.search(query=query)
-        # Convert the response to HTMX
-        htmx_output = json_to_htmx(response)
-        # Return the HTML response
-        return render_template_string(htmx_output)
-    else:
-        # If no query was provided
-        return "Please provide a search query."
+    return('manola')
 
 if __name__ == '__main__':
     app.run(debug=True)
