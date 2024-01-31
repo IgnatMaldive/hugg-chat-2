@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 from hugchat import hugchat
 from hugchat.login import Login
@@ -25,18 +25,19 @@ def index():
 def search():
     try:
         chatbot = hugchat.ChatBot(cookies=cookies.get_dict()) 
-        query_result = chatbot.query("my name is lola")
-        if isinstance(query_result, str):
-            return query_result.encode('utf-8')
-        else:
-            # Handle non-string response appropriately
-            return str(query_result).encode('utf-8')
-    except GeneratorExit:
-        # Handle GeneratorExit exception
-        pass
+
+        user_query = request.args.get('query', '')
+
+        response = chatbot.query(user_query)
+
+        if not isinstance(response, str):
+            response = str(response)
+            return response.encode('utf-8')
     except Exception as e:
-        # Handle other exceptions
-        return f"Error: {str(e)}".encode('utf-8')
+        # Handle exceptions and return error message
+            return f"Error occurred: {str(e)}".encode('utf-8')
+    
+
 
 
 
