@@ -11,7 +11,7 @@ cookies = sign.login()
 # sign.saveCookiesToDir(cookie_path_dir)
 
 # Create a ChatBot
-chatbot = hugchat.ChatBot(cookies=cookies.get_dict())  # or cookie_path="usercookies/<email>.json"
+chatbot = hugchat.ChatBot(cookies)  # or cookie_path="usercookies/<email>.json"
 
 
 def hugg_chat_query(query):
