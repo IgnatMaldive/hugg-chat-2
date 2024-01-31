@@ -1,5 +1,4 @@
-from flask import Flask
-from tavily import TavilyClient
+from flask import Flask, request
 from flask_cors import CORS
 from hugchat import hugchat
 from hugchat.login import Login
@@ -8,15 +7,9 @@ from hugchat.login import Login
 sign = Login("ignatiusmaldive@gmail.com", "hu&LO8f&e34")
 cookies = sign.login()
 
-
-
 app = Flask(__name__)
 
-
-
 CORS(app)
-
-
 
 @app.route('/')
 def index():
@@ -31,8 +24,12 @@ def index():
 @app.route('/search', methods=['GET'])
 def search():
     try:
+        # Get the query parameter from the request
+        user_query = request.args.get('query', '')
+
         chatbot = hugchat.ChatBot(cookies=cookies.get_dict()) 
-        query_result = chatbot.query("my name is alfred")
+        query_result = chatbot.query(user_query)  # Use the user's query
+
         if isinstance(query_result, str):
             return query_result.encode('utf-8')
         else:
